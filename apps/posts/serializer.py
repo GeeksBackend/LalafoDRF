@@ -12,3 +12,11 @@ class FavoritePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoritePost
         fields = ('id', 'user', 'post')
+
+class PostDetailSerializer(serializers.ModelSerializer):
+    post_favorite_users = FavoritePostSerializer(many=True, read_only=True)
+    class Meta:
+        model = Post 
+        fields = ('id', 'title', 'description', 'price',
+                  'image', 'is_active', 'created', 'user', 
+                  'category', 'post_favorite_users')
